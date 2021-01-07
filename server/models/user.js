@@ -1,7 +1,6 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
+const { hashPassword } = require("../helpers/bcrypt");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -11,17 +10,65 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.hasMany (models.City, {foreignKey: 'UserId'})
+      User.hasMany(models.City, { foreignKey: "UserId" });
     }
-  };
-  User.init({
-    username: DataTypes.STRING,
-    password: DataTypes.STRING,
-    email: DataTypes.STRING,
-    userCity: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'User',
-  });
+  }
+  User.init(
+    {
+      username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: {
+          args: true,
+          msg: "Username already in use!",
+        },
+        validate: {
+          notNull: {
+            msg: "Please enter a username",
+          },
+        },
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Please enter your password",
+          },
+          len: {
+            args: [12, 24],
+            msg: "password at least 12 characters and maximum 24 characters",
+          },
+        },
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: {
+          args: true,
+          msg: "Email address already in use!",
+        },
+        validate: {
+          notNull: {
+            msg: "Please enter your email",
+          },
+          isEmail: {
+            args: true,
+            msg: "Must be a valid email address",
+          },
+        },
+      },
+      userCity: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: "User",
+      hooks: {
+        beforeCreate(attributes, options) {
+          attributes.password = hashPassword(attributes.password);
+        },
+      },
+    }
+  );
   return User;
 };
