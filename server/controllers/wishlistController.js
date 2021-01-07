@@ -115,7 +115,6 @@ class WishlistController {
         res.status (500).json ({message: 'internal server error'})
     }
   }
-
 }
 
 module.exports = WishlistController

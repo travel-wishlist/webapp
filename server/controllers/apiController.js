@@ -9,7 +9,6 @@ class ApiController {
    } catch (err) {
     res.status (400).json ({message: 'error getting weather data / cityname not available'})
    }
-
  }
 }
 
