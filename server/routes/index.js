@@ -11,7 +11,7 @@ router.post("/register", RegLogController.register);
 
 router.post("/login", RegLogController.login);
 
-router.post("/loginGoogle", (req, res) => {});
+router.post("/loginGoogle", RegLogController.loginGoogle);
 
 router.use(authenticate);
 
