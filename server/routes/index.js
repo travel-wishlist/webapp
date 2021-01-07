@@ -13,11 +13,15 @@ router.post("/login", RegLogController.login);
 
 router.post("/loginGoogle", (req, res) => {});
 
+router.get('/openWeatherApi/:cityName', ApiController.weather)
+
+router.get('/getCity', ApiController.cityList)
+
 router.use(authenticate);
 
 // routing API
 
-router.get('/openWeatherApi/:cityName', ApiController.weather)
+
 
 router.get('/newsApi', (req, res) => {
 
