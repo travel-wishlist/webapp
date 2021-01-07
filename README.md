@@ -1,12 +1,14 @@
 **Untuk develop project ini:**
 ----
-* pull ke local
-  `git pull <url-to-trawis-repo>`
-
-* `npm install`
+* clone ke repo local
+  `git clone <url-to-trawis-repo>`
+  **NOTE: branch default adalah development**
 
 * bikin branch sesuai fitur yang dikerjain:
   misal: ical ngerjain login, `git checkout -b rizal/login`
+
+* `npm install` untuk install package yang dibutuhkan
+
 
 SERVER-SIDE
 ---
