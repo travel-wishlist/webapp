@@ -14,6 +14,7 @@ class ApiController {
  static async cityList (req, res, next) {
    try {
     let cityList = await getCityList ()
+    cityList.sort();
     res.status (200).json (cityList)
    } catch (err) {
     res.status (400).json ({message: 'error getting citylist'})
