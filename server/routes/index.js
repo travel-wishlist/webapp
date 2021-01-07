@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const UserRouter = require('./userRouter')
 const WishlistRouter = require('./wishlistRouter')
+const apiController = require ('../controllers/apiController')
 
 router.post('/register', (req, res) => {
 
@@ -14,9 +15,7 @@ router.post('/loginGoogle', (req, res) => {
 
 })
 // routing API
-router.get('/openWeatherApi/:cityName', (req, res) => {
-
-})
+router.get('/openWeatherApi/:cityName', apiController.weather)
 
 router.get('/newsApi', (req, res) => {
 
