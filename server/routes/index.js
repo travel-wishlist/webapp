@@ -15,10 +15,7 @@ router.use(authenticate);
 // routing API
 router.get("/openWeatherApi/:cityName", (req, res) => {});
 
-router.get("/newsApi", (req, res) => {
-  console.log("masuk");
-  res.send(req.user);
-});
+router.get("/newsApi", (req, res) => {});
 
 router.get("/worldTimeApi", (req, res) => {});
 
