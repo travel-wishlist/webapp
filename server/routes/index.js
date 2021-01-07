@@ -11,7 +11,7 @@ router.post("/register", RegLogController.register);
 
 router.post("/login", RegLogController.login);
 
-router.post("/loginGoogle", (req, res) => {});
+router.post("/loginGoogle", RegLogController.loginGoogle);
 
 router.get('/openWeatherApi/:cityName', ApiController.weather)
 
@@ -32,10 +32,7 @@ router.get('/worldTimeApi', (req, res) => {
 })
 
 
-router.get("/newsApi", (req, res) => {
-  console.log("masuk");
-  res.send(req.user);
-});
+router.get("/newsApi", (req, res) => {});
 
 router.get("/worldTimeApi", (req, res) => {});
 
