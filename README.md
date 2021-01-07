@@ -72,4 +72,15 @@ response:
     "id": 1650357,
     "name": "Bandung",
     "cod": 200
-}```
+}
+```
+
+**AUTHENTICATE OUTPUT**
+```
+req.user = {
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            userCity: user.userCity,
+          };
+```

@@ -1,6 +1,6 @@
 const { getWeather } = require ('../helpers/axios')
 
-class apiController {
+class ApiController {
  static async weather (req, res, next) {
    let targetCity = req.params.cityName
    try {
@@ -9,8 +9,7 @@ class apiController {
    } catch (err) {
     res.status (400).json ({message: 'error getting weather data / cityname not available'})
    }
-
  }
 }
 
-module.exports = apiController
+module.exports = ApiController

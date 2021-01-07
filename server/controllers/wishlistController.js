@@ -5,7 +5,7 @@ class WishlistController {
     try {
       let data = await City.findAll ({
         where: {
-          UserId: req.user || null // Get custom req from authenticator middleware (the null is for testing)
+          UserId: req.user.id
         }
       })
       res.status (200).json (data)
@@ -20,7 +20,7 @@ class WishlistController {
         name: req.body.name,
         description: req.body.description,
         status: false,
-        // user_id: req.user // Get custom req from authenticator middleware
+        UserId: req.user.id
       }
       let data = await City.create (obj)
       res.status (201).json(data)
@@ -52,7 +52,7 @@ class WishlistController {
       let isSuccess = data[0]
       let dataObj = data[1]
       if (isSuccess === 1) {
-        res.status (200).json (dataObj)
+        res.status (200).json (dataObj[0])
       } else {
         res.status (404).json ({message: 'error not found'})
       }
@@ -83,7 +83,7 @@ class WishlistController {
       let dataObj = data[1]
 
       if (isSuccess === 1) {
-        res.status (200).json (dataObj)
+        res.status (200).json (dataObj[0])
       } else {
         res.status (404).json ({message: 'error not found'})
       }
@@ -115,7 +115,6 @@ class WishlistController {
         res.status (500).json ({message: 'internal server error'})
     }
   }
-
 }
 
 module.exports = WishlistController
