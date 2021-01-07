@@ -1,25 +1,15 @@
 const router = require('express').Router()
 const WishlistController = require('../controllers/wishlistController')
 
-router.get('/', (req, res) => {
+router.get('/', WishlistController.getWish)
 
-})
+router.post('/', WishlistController.postWish)
 
-router.post('/', (req, res) => {
+router.put('/:idCity', WishlistController.putWish)
 
-})
+router.patch('/:idCity', WishlistController.patchWish)
 
-router.put('/:idCity', (req, res) => {
-
-})
-
-router.patch('/:idCity', (req, res) => {
-
-})
-
-router.delete('/:idCity', (req, res) => {
-
-})
+router.delete('/:idCity', WishlistController.deleteWish)
 
 module.exports = router
 
