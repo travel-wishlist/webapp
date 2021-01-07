@@ -24,3 +24,52 @@ Masih kosongan
 **NOTES**
 ---
 Jika ada kesalahan/kekurangan/masalah saat develop yang berhubungan dengan inisiasi proyek ini, tolong hubungi Ical langsung ya!
+
+**WEATHER API**
+example :
+requestURL: http://localhost:5001/openWeatherApi/Bandung
+response: 
+```json
+{
+    "coord": {
+        "lon": 107.6186,
+        "lat": -6.9039
+    },
+    "weather": [
+        {
+            "id": 804,
+            "main": "Clouds",
+            "description": "overcast clouds",
+            "icon": "04n"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 295.92,
+        "feels_like": 298.62,
+        "temp_min": 295.92,
+        "temp_max": 295.92,
+        "pressure": 1008,
+        "humidity": 81,
+        "sea_level": 1008,
+        "grnd_level": 927
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 0.98,
+        "deg": 294
+    },
+    "clouds": {
+        "all": 93
+    },
+    "dt": 1610024852,
+    "sys": {
+        "country": "ID",
+        "sunrise": 1609972827,
+        "sunset": 1610017834
+    },
+    "timezone": 25200,
+    "id": 1650357,
+    "name": "Bandung",
+    "cod": 200
+}```
