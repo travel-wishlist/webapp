@@ -1,8 +1,11 @@
+
 const router = require("express").Router();
 const UserRouter = require("./userRouter");
 const WishlistRouter = require("./wishlistRouter");
 const RegLogController = require("../controllers/regLogController");
 const { authenticate } = require("../middlewares/auth");
+const apiController = require ('../controllers/apiController')
+
 
 router.post("/register", RegLogController.register);
 
@@ -13,7 +16,17 @@ router.post("/loginGoogle", (req, res) => {});
 router.use(authenticate);
 
 // routing API
-router.get("/openWeatherApi/:cityName", (req, res) => {});
+
+router.get('/openWeatherApi/:cityName', apiController.weather)
+
+router.get('/newsApi', (req, res) => {
+
+})
+
+router.get('/worldTimeApi', (req, res) => {
+
+})
+
 
 router.get("/newsApi", (req, res) => {});
 
