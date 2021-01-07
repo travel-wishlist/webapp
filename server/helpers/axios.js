@@ -59,7 +59,7 @@ async function getCityList () {
       arrCity.push (temp)
     })
 
-    arrCitySpaceRemoved = []
+    let arrCitySpaceRemoved = []
     arrCity.forEach (e => {
       let temp = ''
       for (let i = 0; i < e.length; i++) {
@@ -72,8 +72,17 @@ async function getCityList () {
       arrCitySpaceRemoved.push (temp)
     })
 
-    arrCitySpaceRemoved.pop()
-    return arrCitySpaceRemoved
+    let arrCityFinal = []
+    arrCitySpaceRemoved.forEach (e => {
+      if (e === 'UTC' || e.includes("GMT") === true) {
+        console.log (e)
+      }
+      if (e.length !== 0  && e !== 'UTC' && e.includes("GMT") !== true) {
+        arrCityFinal.push (e)
+      }
+    })
+
+    return arrCityFinal
   } catch (err) {
     console.log (err, 'error getCityList (helpers)')
   }
