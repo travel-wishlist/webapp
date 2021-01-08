@@ -1,5 +1,5 @@
 const { checkToken } = require("../helpers/jwt");
-const { User } = require("../models");
+const { User, City } = require("../models");
 
 // cek isi dari access_token dan masukkan user data ke req.user apabila sesuai dengan database
 function authenticate(req, res, next) {
@@ -38,22 +38,23 @@ function authenticate(req, res, next) {
 
 // cek apakah user id di req.params sesuai dengan user id di req.user
 function authorize(req, res, next) {
-  const id = +req.params.id
-  User.findOne({
-    where: { id }
+  const cityId = +req.params.idCity;
+  
+  City.findOne({
+    where: { id: cityId },
   })
-  .then(user => {
-    if(user.id === req.user.id){
-      next()
-    }
-    else{
-      res.status(401).json({message: "Unauthorized"});
-    }
-  })
-  .catch(err => {
-    res.status(500).json({message: "Internal Server Error"})
-  })
-
+    .then((city) => {
+      if (!city) {
+        res.status(404).json({ message: "Not Found" });
+      } else if (city.UserId === req.user.id) {
+        next();
+      } else {
+        res.status(401).json({ message: "Unauthorized" });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "Internal Server Error" });
+    });
 }
 
 module.exports = { authenticate, authorize };
