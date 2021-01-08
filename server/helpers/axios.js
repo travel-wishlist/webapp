@@ -1,5 +1,4 @@
 const axios = require ('axios');
-const e = require('express');
 
 async function axiosWeather (cityName) {
   try {
@@ -88,6 +87,7 @@ async function getCityList () {
 async function getNews (countryId) {
   try {
     let response = await axios.get (`http://newsapi.org/v2/top-headlines?country=${countryId}&apiKey=168e6737d55f40508dc5d954af6ea3a0`)
+    // let response = await axios.get (`http://api.mediastack.com/v1/news?access_key=1f27e5b872866a22b911bed4c740180b&keywords=travel&countries=${countryId}&languages=en&categories=general,entertainment,technology`)
     return response
   } catch (err) {
     console.error (err, 'error api getNews')
