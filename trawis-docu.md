@@ -112,3 +112,49 @@ Response:
 }
 ```
 
+### PUT /user/:id
+
+Request:
+
+- data:
+
+```json
+{
+  "username": "string",
+  "email": "string",
+  "userCity": "string"
+}
+```
+
+Response:
+
+- status: 200
+- body:
+  ​
+
+```json
+{
+    "access_token": "jwt string"
+}
+```
+
+- status: 400 - Bad Request
+- body:
+  ​
+
+```json
+{
+  "message": "error message"
+}
+```
+
+- status: 500 - Internal Server Error
+- body:
+  ​
+
+```json
+{
+  "message": "Internal Server Error"
+}
+```
+
