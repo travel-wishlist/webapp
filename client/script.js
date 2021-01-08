@@ -68,15 +68,16 @@ $(document).ready(function () {
         email,
         userCity
       }
-    }).then(response => {
+    }).done(response => {
       $("#registerUsername").val("");
       $("#registerPassword").val("");
       $("#registerEmail").val("");
       checkAuth();
-    }).catch(err => {
+    }).fail(err => {
       $(".register-error-msg").text("")
       console.log(err);
-      err.responseJSON.message.forEach(e => {
+      err.responseJSON.messages.forEach(e => {
+        console.log(e);
         $(".register-error-msg").append(`<p>${e}</p>`);
       })
     })
@@ -90,6 +91,41 @@ $(document).ready(function () {
       console.log('User signed out.');
     });
     checkAuth();
+  })
+
+  $(".add-city-btn").click(event => {
+    event.preventDefault();
+    $("#add-city-form").show();
+  })
+
+  $("#cancel-add-city-btn").click(event => {
+    event.preventDefault();
+    $("#add-city-form").hide();
+  })
+
+  $("#add-city-form-btn").click(event => {
+    event.preventDefault();
+    const cityName = $("#cityName").val();
+    const cityDesc = $("#cityDesc").val();
+    console.log("tambah kota!", cityName, cityDesc);
+    $.ajax({
+      url: "http://localhost:5001/wishlists",
+      method: "POST",
+      headers: {
+        access_token: localStorage.access_token
+      },
+      data: {
+        name: cityName,
+        description: cityDesc
+      }
+    })
+    .done(response => {
+      console.log(response);
+      checkAuth();
+    })
+    .fail(err => {
+      console.log(err);
+    })
 
   })
   
@@ -97,15 +133,20 @@ $(document).ready(function () {
 
 function checkAuth(){
   if (!localStorage.access_token) {
+    $("nav").hide();
     $("#login-form").show();
     $("#register-form").hide();
     $("#content").hide();
+    $("#add-city-form").hide();
   }
   else {
+    $("nav").show();
     getWishList()
     $("#login-form").hide();
     $("#register-form").hide();
     $("#content").show();
+    $(".page-title").show();
+    $("#add-city-form").hide();
   }
 }
 
@@ -127,35 +168,22 @@ function onSignIn(googleUser) {
 }
 
 function getWishList() {
-  $.ajax({
-    url: "http://localhost:5001/wishlists",
-    method: "GET",
-    headers: {
-      access_token: localStorage.access_token
-    }
-  })
-    .done(response => {
-      console.log(response)
-      $('#wishlist').html('')
-      response.forEach(wishlist => {
-        $('#wishlist').append(`
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">${wishlist.name}</h5>
-            <p class="card-text">${wishlist.description}</p>
-            <a href="#" class="card-link">Update</a>
-            <a href="#" class="card-link">Delete</a>
-          </div>
-        </div>
-        `)
-      })
-    })
-    .fail(error => {
-      console.log(error)
-    })
-    .always(() => {
-      $('#login-form').hide();
-      $('#register-form').hide();
-      $('#content').show();
-    })
+  // $.ajax({
+  //   url: "http://localhost:5001/wishlists",
+  //   method: "GET",
+  //   headers: {
+  //     access_token: localStorage.access_token
+  //   }
+  // })
+  //   .done(response => {
+  //     console.log(response);
+  //   })
+  //   .fail(error => {
+  //     console.log(error)
+  //   })
+  //   .always(() => {
+  //     $('#login-form').hide();
+  //     $('#register-form').hide();
+  //     $('#content').show();
+  //   })
 }
