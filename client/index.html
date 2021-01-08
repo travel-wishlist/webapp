@@ -4,7 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="" />
-    <meta name="google-signin-client_id" content="243469063716-4df9eg1nij5er5rg92biskpr1akqit79.apps.googleusercontent.com">
+    <meta
+      name="google-signin-client_id"
+      content="243469063716-4df9eg1nij5er5rg92biskpr1akqit79.apps.googleusercontent.com"
+    />
 
     <title>Travel Wishlist</title>
 
@@ -41,6 +44,7 @@
     <!-- Custom styles for this template -->
     <link href="/styles/signin.css" rel="stylesheet" />
   </head>
+  
   <!-- Login page -->
   <body>
     <div class="container-fluid mt-3 border" id="login-form">
@@ -98,6 +102,62 @@
           />
           <h1 class="h3 mb-3 fw-normal">Please register</h1>
           <label for="registerUsername" class="visually-hidden">Username</label>
+
+          <input
+            type="text"
+            id="registerUsername"
+            class="form-control"
+            placeholder="Username"
+            required
+            autofocus
+          />
+          <label for="registerPassword" class="visually-hidden">Password</label>
+          <input
+            type="password"
+            id="registerPassword"
+            class="form-control"
+            placeholder="Password"
+            required
+          />
+
+          <label for="registerEmail" class="visually-hidden">Email</label>
+          <input
+            type="email"
+            id="registerEmail"
+            class="form-control"
+            placeholder="Email"
+            required
+            autofocus
+          />
+          <label for="registerCity" class="visually-hidden">Username</label>
+          <select
+            name="registerCity"
+            id="registerCity"
+            class="form-control"
+            required
+            autofocus
+          >
+          </select>
+          <div class="register-error-msg" style="color: red"></div>
+          <button class="w-100 btn btn-lg btn-primary register-btn" type="submit">
+            Register
+          </button>
+          <div class="g-signin2 w-100 btn btn-lg float-md-none" data-onsuccess="onSignIn"></div>
+
+          <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+        </form>
+      </div>
+    </div>
+    
+
+
+    <!-- Register form -->
+    <div class="container" id="register-form">
+      <div class="form-signin">
+        <form>
+          <img class="mb-4" src="./assets/img/globe.png" alt="" width="72" />
+          <h1 class="h3 mb-3 fw-normal">Please register</h1>
+          <label for="registerUsername" class="visually-hidden">Username</label>
           <input
             type="text"
             id="registerUsername"
@@ -131,31 +191,105 @@
             required
             autofocus
           >
-          <option value="jakarta">jakarta</option>
           </select>
           <div class="register-error-msg" style="color: red"></div>
-          <button class="w-100 btn btn-lg btn-primary register-btn" type="submit">
+          <button
+            class="w-100 btn btn-lg btn-primary register-btn"
+            type="submit"
+          >
             Register
           </button>
-          <div class="g-signin2 w-100 btn btn-lg float-md-none" data-onsuccess="onSignIn"></div>
+          <div
+            class="g-signin2 w-100 btn btn-lg float-md-none"
+            data-onsuccess="onSignIn"
+          ></div>
           <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
         </form>
       </div>
     </div>
-  </div>
 
-  <!-- Content -->
-    <div class="container-fluid mt-3 border" id="content">
-      <div class="row">
-        <div class="col-sm content">
-          <h1 class="text-center">welcome</h1>
-          <a href="#" id="logout-btn">Logout</a>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Travel wishlist</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item active">
+              <a class="nav-link" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="logout-btn">Logout</a>
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-          <!-- Template wishlist cards -->
-          <div id="wishlist" class="container">
-      
+    <!-- Content -->
+    <div class="container" id="content">
+      <main>
+        <section class="py-5 text-center container">
+          <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+              <h1 class="fw-light">Travel wishlist</h1>
+              <p class="lead text-muted">Let's travel!</p>
+              <p>
+                <a href="#" class="btn btn-primary my-2 add-city-btn">Add city</a>
+                <!-- <a href="#" class="btn btn-secondary my-2">Secondary action</a> -->
+              </p>
+            </div>
           </div>
-       </div>
+        </section>
+      
+        <div class="album py-5 bg-light">
+        </div>
+      
+      </main>
+      <!-- Template wishlist cards -->
+      <div id="wishlist" class="container"></div>
+    </div>
+
+    <!-- Add city -->
+    <div class="container" id="add-city-form">
+      <div class="form-signin">
+        <form>
+          <h1 class="h3 mb-3 fw-normal">Add new city</h1>
+          <label for="cityName" class="visually-hidden">City name</label>
+          <input
+            type="text"
+            id="cityName"
+            class="form-control"
+            placeholder="City name"
+            required
+            autofocus
+          />
+          <label for="cityDesc" class="visually-hidden">Description</label>
+          <input
+            type="text"
+            id="cityDesc"
+            class="form-control"
+            placeholder="City Description"
+            required
+          />
+          <div class="add-city-error-msg" style="color: red"></div>
+          <button
+            class="w-100 btn btn-lg btn-primary"
+            id="add-city-form-btn"
+            type="submit"
+          >
+            Add city
+          </button>
+          <button
+            class="w-100 btn btn-lg btn-danger"
+            id="cancel-add-city-btn"
+            type="submit"
+          >
+            Cancel
+          </button>
+        </form>
       </div>
     </div>
 
@@ -199,6 +333,5 @@
     ></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="./script.js"></script>
-
   </body>
 </html>
