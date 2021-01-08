@@ -22,12 +22,7 @@ class RegLogController {
         });
       })
       .catch((err) => {
-        if (err.name === "SequelizeUniqueConstraintError" || err.name === "SequelizeValidationError") {
-          const errorMsg = err.errors.map(e => e.message)
-          res.status(400).json({ message: errorMsg })
-        } else {
-          res.status(500).json({ message: "Internal Server Error" });
-        }
+        next(err)
       });
   }
 
@@ -40,24 +35,26 @@ class RegLogController {
     })
       .then((user) => {
         if (!user) {
-          res.status(400).json({ message: "Username cannot be found" });
+          next({ name: "AuthenticationError" })
         }
-        const truePassword = comparePassword(password, user.password);
-        if (!truePassword) {
-          res.status(400).json({ message: "Wrong password" });
-        } else {
-          const payload = {
-            id: user.id,
-            username: user.username,
-            email: user.email,
-            userCity: user.userCity,
-          };
-          const access_token = createToken(payload);
-          res.status(200).json({ access_token });
+        else {
+          const truePassword = comparePassword(password, user.password);
+          if (!truePassword) {
+            next({ name: "AuthenticationError" })
+          } else {
+            const payload = {
+              id: user.id,
+              username: user.username,
+              email: user.email,
+              userCity: user.userCity,
+            };
+            const access_token = createToken(payload);
+            res.status(200).json({ access_token });
+          }
         }
       })
       .catch((err) => {
-        res.status(500).json({ message: "Internal Server Error" });
+        next(err)
       });
   }
 
