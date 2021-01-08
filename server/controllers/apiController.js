@@ -1,4 +1,4 @@
-const { getWeather } = require ('../helpers/axios')
+const { getWeather, getCityList } = require ('../helpers/axios')
 
 class ApiController {
  static async weather (req, res, next) {
@@ -8,6 +8,16 @@ class ApiController {
     res.status (200).json (weatherData)
    } catch (err) {
     res.status (400).json ({message: 'error getting weather data / cityname not available'})
+   }
+ }
+
+ static async cityList (req, res, next) {
+   try {
+    let cityList = await getCityList ()
+    cityList.sort();
+    res.status (200).json (cityList)
+   } catch (err) {
+    res.status (400).json ({message: 'error getting citylist'})
    }
  }
 }

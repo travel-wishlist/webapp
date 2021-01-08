@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="google-signin-client_id" content="243469063716-4df9eg1nij5er5rg92biskpr1akqit79.apps.googleusercontent.com">
+
+    <title>Travel Wishlist</title>
+
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/5.0/examples/sign-in/"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+    <!-- Bootstrap core CSS -->
+    <link href="./styles/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link href="/styles/signin.css" rel="stylesheet" />
+  </head>
+
+  <body class="text-center">
+    <div class="form-signin" id="login-form">
+      <form>
+        
+        <img
+          class="mb-4"
+          src="./assets/img/globe.png"
+          alt=""
+          width="72"
+        />
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        <label for="loginUsername" class="visually-hidden">Username</label>
+        <input
+          type="text"
+          id="loginUsername"
+          class="form-control"
+          placeholder="Username"
+          required
+          autofocus
+        />
+        <label for="loginPassword" class="visually-hidden">Password</label>
+        <input
+          type="password"
+          id="loginPassword"
+          class="form-control"
+          placeholder="Password"
+          required
+        />
+        <div class="login-error-msg" style="color: red"></div>
+        <button class="w-100 btn btn-lg btn-primary login-btn" type="submit">
+          Sign in
+        </button>
+        <div class="g-signin2 w-100 btn btn-lg" data-onsuccess="onSignIn"></div>
+        <a href="#" id="not-registered-btn">Not registered?</a>
+        <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+      </form>
+    </div>
+
+    <div class="form-signin" id="register-form">
+      <form>
+        <img
+          class="mb-4"
+          src="./assets/img/globe.png"
+          alt=""
+          width="72"
+        />
+        <h1 class="h3 mb-3 fw-normal">Please register</h1>
+        <label for="registerUsername" class="visually-hidden">Username</label>
+        <input
+          type="text"
+          id="registerUsername"
+          class="form-control"
+          placeholder="Username"
+          required
+          autofocus
+        />
+        <label for="registerPassword" class="visually-hidden">Password</label>
+        <input
+          type="password"
+          id="registerPassword"
+          class="form-control"
+          placeholder="Password"
+          required
+        />
+        <label for="registerEmail" class="visually-hidden">Email</label>
+        <input
+          type="email"
+          id="registerEmail"
+          class="form-control"
+          placeholder="Email"
+          required
+          autofocus
+        />
+        <label for="registerCity" class="visually-hidden">Username</label>
+        <select
+          name="registerCity"
+          id="registerCity"
+          class="form-control"
+          required
+          autofocus
+        >
+        </select>
+        <div class="register-error-msg" style="color: red"></div>
+        <button class="w-100 btn btn-lg btn-primary register-btn" type="submit">
+          Register
+        </button>
+        <div class="g-signin2 w-100 btn btn-lg" data-onsuccess="onSignIn"></div>
+        <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+      </form>
+    </div>
+
+    <div class="content">
+      <h1>welcome</h1>
+      <a href="#" id="logout-btn">Logout</a>
+    </div>
+
+    <!-- jQuery -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+      integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
