@@ -44,49 +44,112 @@
     <!-- Custom styles for this template -->
     <link href="/styles/signin.css" rel="stylesheet" />
   </head>
+  
+  <!-- Login page -->
+  <body>
+    <div class="container-fluid mt-3 border" id="login-form">
+      <div class="row">
+        <div class="col-sm form-signin">
+          <form>
+            <img
+              class="mb-4"
+              src="./assets/img/globe.png"
+              alt=""
+              width="72"
+            />
+            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+            <label for="loginUsername" class="visually-hidden">Username</label>
+            <input
+              type="text"
+              id="loginUsername"
+              class="form-control"
+              placeholder="Username"
+              required
+              autofocus
+            />
+            <label for="loginPassword" class="visually-hidden">Password</label>
+            <input
+              type="password"
+              id="loginPassword"
+              class="form-control"
+              placeholder="Password"
+              required
+            />
+            <div class="login-error-msg" style="color: red"></div>
+            <button class="w-100 btn btn-lg btn-primary login-btn" id="login-btn" type="submit">
+              Sign in
+            </button>
+            <div class="g-signin2 w-100 btn btn-lg float-md-start" data-onsuccess="onSignIn"></div>
+            <a href="#" id="not-registered-btn">Not registered?</a>
+            <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+          </form>
+          </div>
+      </div>
+    </div>
 
-  <body class="text-center">
-    
-    <!-- Login page -->
-    <div class="container" id="login-form">
-      <div class="form-signin">
+
+
+  <!-- Register form -->
+  <div class="container-fluid mt-3 border" id="register-form">
+    <div class="row">
+      <div class="col-sm form-signin">
         <form>
-          <img class="mb-4" src="./assets/img/globe.png" alt="" width="72" />
-          <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-          <label for="loginUsername" class="visually-hidden">Username</label>
+          <img
+            class="mb-4"
+            src="./assets/img/globe.png"
+            alt=""
+            width="72"
+          />
+          <h1 class="h3 mb-3 fw-normal">Please register</h1>
+          <label for="registerUsername" class="visually-hidden">Username</label>
+
           <input
             type="text"
-            id="loginUsername"
+            id="registerUsername"
             class="form-control"
             placeholder="Username"
             required
             autofocus
           />
-          <label for="loginPassword" class="visually-hidden">Password</label>
+          <label for="registerPassword" class="visually-hidden">Password</label>
           <input
             type="password"
-            id="loginPassword"
+            id="registerPassword"
             class="form-control"
             placeholder="Password"
             required
           />
-          <div class="login-error-msg" style="color: red"></div>
-          <button
-            class="w-100 btn btn-lg btn-primary login-btn"
-            id="login-btn"
-            type="submit"
+
+          <label for="registerEmail" class="visually-hidden">Email</label>
+          <input
+            type="email"
+            id="registerEmail"
+            class="form-control"
+            placeholder="Email"
+            required
+            autofocus
+          />
+          <label for="registerCity" class="visually-hidden">Username</label>
+          <select
+            name="registerCity"
+            id="registerCity"
+            class="form-control"
+            required
+            autofocus
           >
-            Sign in
+          </select>
+          <div class="register-error-msg" style="color: red"></div>
+          <button class="w-100 btn btn-lg btn-primary register-btn" type="submit">
+            Register
           </button>
-          <div
-            class="g-signin2 w-100 btn btn-lg float-md-start"
-            data-onsuccess="onSignIn"
-          ></div>
-          <a href="#" id="not-registered-btn">Not registered?</a>
+          <div class="g-signin2 w-100 btn btn-lg float-md-none" data-onsuccess="onSignIn"></div>
+
           <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
         </form>
       </div>
     </div>
+    
+
 
     <!-- Register form -->
     <div class="container" id="register-form">
@@ -229,6 +292,38 @@
         </form>
       </div>
     </div>
+
+    <!-- weather-div-here(not done) -->
+    <div class="container-fluid mt-3 border" id="api-page">
+      <div class="row">
+        <div class="col-sm mt-5 paddingCustom" id="weather-list">
+          Weather Here
+        </div>
+        <div class="col-md-8 border">
+          <h3 id="newsColumn">News Headlines, </h3>
+          <br>
+          <div class="row container-fluid">
+            <div class="col-md-12">
+                <div class="card-hover-shadow-2x mb-3 card">
+                    <div class="card-header-tab card-header">
+                        <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i class="fa fa-tasks"></i>&nbsp;News Lists</div>
+                    </div>
+                    <div class="scroll-area-sm">
+                        <perfect-scrollbar class="ps-show-limits">
+                            <div style="position: static;" class="ps ps--active-y">
+                                <div class="ps-content">
+                                    <ul class=" list-group list-group-flush" id="news-list"></ul>
+                                      
+                                    </ul>
+                                </div>
+                            </div>
+                        </perfect-scrollbar>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+      </div>
 
     <!-- jQuery -->
     <script
