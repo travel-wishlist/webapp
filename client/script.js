@@ -48,7 +48,7 @@ $(document).ready(function () {
 
     $("#login-form").hide();
     $("#register-form").show();
-    $(".content").hide();
+    $("#content").hide();
   })
 
   $(".register-btn").click(function(event){
@@ -99,12 +99,13 @@ function checkAuth(){
   if (!localStorage.access_token) {
     $("#login-form").show();
     $("#register-form").hide();
-    $(".content").hide();
+    $("#content").hide();
   }
   else {
+    getWishList()
     $("#login-form").hide();
     $("#register-form").hide();
-    $(".content").show();
+    $("#content").show();
   }
 }
 
@@ -123,4 +124,38 @@ function onSignIn(googleUser) {
   .fail(err => {
     console.log(err);
   })
+}
+
+function getWishList() {
+  $.ajax({
+    url: "http://localhost:5001/wishlists",
+    method: "GET",
+    headers: {
+      access_token: localStorage.access_token
+    }
+  })
+    .done(response => {
+      console.log(response)
+      $('#wishlist').html('')
+      response.forEach(wishlist => {
+        $('#wishlist').append(`
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">${wishlist.name}</h5>
+            <p class="card-text">${wishlist.description}</p>
+            <a href="#" class="card-link">Update</a>
+            <a href="#" class="card-link">Delete</a>
+          </div>
+        </div>
+        `)
+      })
+    })
+    .fail(error => {
+      console.log(error)
+    })
+    .always(() => {
+      $('#login-form').hide();
+      $('#register-form').hide();
+      $('#content').show();
+    })
 }
