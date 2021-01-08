@@ -92,7 +92,6 @@ async function getNews (countryId) {
   } catch (err) {
     console.error (err, 'error api getNews')
   }
-
 }
 
 module.exports = {

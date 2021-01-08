@@ -23,8 +23,6 @@ router.use(authenticate);
 
 // routing API
 
-
-
 router.get('/newsApi', (req, res) => {
 
 })

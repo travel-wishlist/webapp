@@ -26,7 +26,7 @@ class ApiController {
   try {
    let weatherData = await getWeather (targetCity)
    let cityId = await weatherData.sys.country.toLowerCase()
-   console.log (cityId)
+
    let newsData = await getNews (cityId)
    console.log (newsData.data)
    res.status (200).json (newsData.data.articles)
