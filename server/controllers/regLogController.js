@@ -3,9 +3,9 @@ const { comparePassword } = require("../helpers/bcrypt");
 const { createToken } = require("../helpers/jwt");
 
 class RegLogController {
-  static register (req, res, next){
+  static register(req, res, next) {
     const { username, password, email, userCity } = req.body;
-  
+
     User.create({
       username,
       password,
@@ -21,11 +21,11 @@ class RegLogController {
         });
       })
       .catch((err) => {
-        if(err.name === "SequelizeUniqueConstraintError" || err.name === "SequelizeValidationError"){
-          const errorMsg = err.errors.map( e => e.message)
-          res.status(400).json({message: errorMsg})
+        if (err.name === "SequelizeUniqueConstraintError" || err.name === "SequelizeValidationError") {
+          const errorMsg = err.errors.map(e => e.message)
+          res.status(400).json({ message: errorMsg })
         } else {
-          res.status(500),json({message: "Internal Server Error"});
+          res.status(500).json({ message: "Internal Server Error" });
 
         }
       });
@@ -57,7 +57,7 @@ class RegLogController {
         }
       })
       .catch((err) => {
-        res.status(500).json({message: "Internal Server Error"});
+        res.status(500).json({ message: "Internal Server Error" });
       });
   }
 
