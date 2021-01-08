@@ -41,45 +41,50 @@
     <!-- Custom styles for this template -->
     <link href="/styles/signin.css" rel="stylesheet" />
   </head>
+  <!-- Login page -->
+  <div class="container">
+    <body class="text-center">
+      <div class="form-signin" id="login-form">
+        <form>
+          
+          <img
+            class="mb-4"
+            src="./assets/img/globe.png"
+            alt=""
+            width="72"
+          />
+          <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+          <label for="loginUsername" class="visually-hidden">Username</label>
+          <input
+            type="text"
+            id="loginUsername"
+            class="form-control"
+            placeholder="Username"
+            required
+            autofocus
+          />
+          <label for="loginPassword" class="visually-hidden">Password</label>
+          <input
+            type="password"
+            id="loginPassword"
+            class="form-control"
+            placeholder="Password"
+            required
+          />
+          <div class="login-error-msg" style="color: red"></div>
+          <button class="w-100 btn btn-lg btn-primary login-btn" type="submit">
+            Sign in
+          </button>
+          <div class="g-signin2 w-100 btn btn-lg float-md-start" data-onsuccess="onSignIn"></div>
+          <a href="#" id="not-registered-btn">Not registered?</a>
+          <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+        </form>
+      </div>
+  </div>
 
-  <body class="text-center">
-    <div class="form-signin" id="login-form">
-      <form>
-        
-        <img
-          class="mb-4"
-          src="./assets/img/globe.png"
-          alt=""
-          width="72"
-        />
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-        <label for="loginUsername" class="visually-hidden">Username</label>
-        <input
-          type="text"
-          id="loginUsername"
-          class="form-control"
-          placeholder="Username"
-          required
-          autofocus
-        />
-        <label for="loginPassword" class="visually-hidden">Password</label>
-        <input
-          type="password"
-          id="loginPassword"
-          class="form-control"
-          placeholder="Password"
-          required
-        />
-        <div class="login-error-msg" style="color: red"></div>
-        <button class="w-100 btn btn-lg btn-primary login-btn" type="submit">
-          Sign in
-        </button>
-        <div class="g-signin2 w-100 btn btn-lg" data-onsuccess="onSignIn"></div>
-        <a href="#" id="not-registered-btn">Not registered?</a>
-        <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
-      </form>
-    </div>
 
+  <!-- Register form -->
+  <div class="container">
     <div class="form-signin" id="register-form">
       <form>
         <img
@@ -128,10 +133,11 @@
         <button class="w-100 btn btn-lg btn-primary register-btn" type="submit">
           Register
         </button>
-        <div class="g-signin2 w-100 btn btn-lg" data-onsuccess="onSignIn"></div>
+        <div class="g-signin2 w-100 btn btn-lg float-md-none" data-onsuccess="onSignIn"></div>
         <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
       </form>
     </div>
+  </div>
 
     <div class="content">
       <h1>welcome</h1>
@@ -146,5 +152,6 @@
     ></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="./script.js"></script>
+
   </body>
 </html>
