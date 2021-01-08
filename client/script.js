@@ -1,103 +1,126 @@
-const PORT = 5001
-const baseUrl = `http://localhost:${PORT}`
+$(document).ready(function () {
+  checkAuth();
 
-$(document).ready(function() {
-  if(localStorage.access_token) {
-    $('#login-form').hide();
-    $('#register-form').hide();
-    $('#navbar').show();
-    $('#register-login').hide();
-  } else {
-    $('#login-form').show();
-    $('#register-form').hide();
-    $('#navbar').hide();
-    $('#register-login').show();
-  }
-})
-
-$('#register-login').click(function (event) {
-  event.preventDefault();
-  $('#login-form').hide();
-  $('#register-form').show();
-  $('#navbar').hide();
-  $('#register-login').hide();
-})
-
-$('#logout').click(function () {
-  localStorage.clear();
-
-  if(localStorage.access_token) {
-    $('#login-form').hide();
-    $('#register-form').hide();
-    $('#navbar').show();
-    $('#register-login').hide();
-  } else {
-    $('#login-form').show();
-    $('#register-form').hide();
-    $('#navbar').hide();
-    $('#register-login').show();
-  }
-})
-
-$('#login').click(function(event) {
-  event.preventDefault();
-  const username = $('#username').val();
-  const email = $('#email').val();
-  const password = $('#password').val()
-
-  $.ajax({
-    method: 'POST',
-    url: `${baseUrl}/login`,
-    data: {
-      username,
-      email,
-      password
-    }
-  })
+  $(".login-btn").click(event => {
+    event.preventDefault();
+    const username = $("#loginUsername").val();
+    const password = $("#loginPassword").val();
+    
+    $.ajax({
+      url: "http://localhost:5001/login",
+      method: "POST",
+      data: {
+        username,
+        password
+      }
+    })
     .done(response => {
-      localStorage.setItem('access_token', response.access_token)
-      $('#login-form').hide()
-      $('#register-form').hide()
-      $('#register-login').hide()
-      $('#navbar').show()
+      $("#loginUsername").val("")
+      $("#loginPassword").val("");
+      localStorage.access_token = response.access_token;
+      checkAuth();
     })
-    .fail(err => {})
-    .always(() => {
-      $('#username').val('')
-      $('#email').val('')
-      $('#password').val('')
-      $('#userCity').val('')
+    .fail(err => {
+      $(".login-error-msg").text(err.responseJSON.message);
     })
-})
 
-$('#register').click(function(event) {
-  event.preventDefault()
-  const username = $('#username-register').val()
-  const email = $('#email-register').val()
-  const password = $('#password-register').val()
-  const userCity = $('#userCity-register').val()
-
-  $.ajax({
-    method: 'POST',
-    url: `${baseUrl}/register`,
-    data: {
-      username,
-      email,
-      password,
-      userCity
-    }
   })
+
+  $("#not-registered-btn").click(event => {
+    event.preventDefault();
+
+    $.ajax({
+      url: "http://localhost:5001/getCity",
+      method: "GET"
+    })
+
     .done(response => {
-      $('#login-form').show()
-      $('#register-form').hide()
-      $('#register-login').hide()
-      $('#navbar').hide()
+      $("#registerCity").html("")
+      response.forEach(city => {
+        $("#registerCity").append(`
+        <option value="${city}">${city}</option>
+        `)
+      })
     })
-    .fail(err => {})
-    .always(() => {
-      $('#username').val('')
-      $('#email').val('')
-      $('#password').val('')
-      $('#userCity').val('')
+    .fail(err => {
+      console.log(err);
     })
-})
+
+    $("#login-form").hide();
+    $("#register-form").show();
+    $(".content").hide();
+  })
+
+  $(".register-btn").click(function(event){
+    event.preventDefault();
+    const username = $("#registerUsername").val();
+    const password = $("#registerPassword").val();
+    const email = $("#registerEmail").val();
+    const userCity = $("#registerCity").val();
+    // console.log(username, password, email, userCity);
+
+    $.ajax({
+      url: "http://localhost:5001/register",
+      method: "POST",
+      data: {
+        username,
+        password,
+        email,
+        userCity
+      }
+    }).then(response => {
+      $("#registerUsername").val("");
+      $("#registerPassword").val("");
+      $("#registerEmail").val("");
+      checkAuth();
+    }).catch(err => {
+      $(".register-error-msg").text("")
+      console.log(err);
+      err.responseJSON.message.forEach(e => {
+        $(".register-error-msg").append(`<p>${e}</p>`);
+      })
+    })
+  })
+
+  $("#logout-btn").click(function(event){
+    event.preventDefault();
+    localStorage.clear();
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+    checkAuth();
+
+  })
+  
+});
+
+function checkAuth(){
+  if (!localStorage.access_token) {
+    $("#login-form").show();
+    $("#register-form").hide();
+    $(".content").hide();
+  }
+  else {
+    $("#login-form").hide();
+    $("#register-form").hide();
+    $(".content").show();
+  }
+}
+
+function onSignIn(googleUser) {
+  var id_token = googleUser.getAuthResponse().id_token;
+  $.ajax({
+    url: "http://localhost:5001/loginGoogle",
+    method: "POST",
+    data: { id_token }
+  })
+  .done(response => {
+    localStorage.access_token = response.access_token;
+    checkAuth();
+    
+  })
+  .fail(err => {
+    console.log(err);
+  })
+}
