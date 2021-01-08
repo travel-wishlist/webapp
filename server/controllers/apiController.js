@@ -1,4 +1,4 @@
-const { getWeather, getCityList } = require ('../helpers/axios')
+const { getWeather, getCityList, getNews } = require ('../helpers/axios')
 
 class ApiController {
  static async weather (req, res, next) {
@@ -20,6 +20,20 @@ class ApiController {
     res.status (400).json ({message: 'error getting citylist'})
    }
  }
+
+ static async newsList (req, res, next) {
+  let targetCity = req.params.cityName
+  try {
+   let weatherData = await getWeather (targetCity)
+   let cityId = await weatherData.sys.country.toLowerCase()
+   console.log (cityId)
+   let newsData = await getNews (cityId)
+   console.log (newsData.data)
+   res.status (200).json (newsData.data.articles)
+  } catch (err) {
+   res.status (400).json ({message: 'error getting newslist'})
+  }
+}
 }
 
 module.exports = ApiController

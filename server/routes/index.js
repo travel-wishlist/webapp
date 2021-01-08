@@ -17,6 +17,8 @@ router.get('/openWeatherApi/:cityName', ApiController.weather)
 
 router.get('/getCity', ApiController.cityList)
 
+router.get('/getNews/:cityName', ApiController.newsList)
+
 router.use(authenticate);
 
 // routing API

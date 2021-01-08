@@ -6,7 +6,7 @@ async function axiosWeather (cityName) {
     const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&callback=test&appid=4cbc37962112990eed1f1a20d71d34e6`);
     return response
   } catch (err) {
-    console.error (err, 'error api')
+    console.error (err, 'error api weather')
   }
 } 
 
@@ -74,9 +74,6 @@ async function getCityList () {
 
     let arrCityFinal = []
     arrCitySpaceRemoved.forEach (e => {
-      if (e === 'UTC' || e.includes("GMT") === true) {
-        console.log (e)
-      }
       if (e.length !== 0  && e !== 'UTC' && e.includes("GMT") !== true) {
         arrCityFinal.push (e)
       }
@@ -88,7 +85,18 @@ async function getCityList () {
   }
 }
 
+async function getNews (countryId) {
+  try {
+    let response = await axios.get (`http://newsapi.org/v2/top-headlines?country=${countryId}&apiKey=168e6737d55f40508dc5d954af6ea3a0`)
+    return response
+  } catch (err) {
+    console.error (err, 'error api getNews')
+  }
+
+}
+
 module.exports = {
   getWeather,
-  getCityList
+  getCityList,
+  getNews
 }
